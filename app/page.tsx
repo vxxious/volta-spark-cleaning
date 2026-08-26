@@ -14,7 +14,7 @@ import {
   Leaf,
   MapPin,
   MessageCircle,
-  PartyPopper,
+  RefreshCcw,
   ShieldCheck,
   SprayCan,
   Truck,
@@ -71,7 +71,7 @@ const services = [
     name: "Event and short-let reset",
     shortName: "Event / short-let",
     description: "Fast, thoughtful resets before guests arrive or after the celebration ends.",
-    icon: PartyPopper,
+    icon: RefreshCcw,
   },
 ] as const;
 

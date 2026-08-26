@@ -45,6 +45,8 @@ test("ships product metadata and removes starter dependencies", async () => {
   assert.match(page, /brandIcons\.instagram/);
   assert.match(page, /brandIcons\.tiktok/);
   assert.match(page, /brandIcons\.facebook/);
+  assert.match(page, /icon: RefreshCcw/);
+  assert.doesNotMatch(page, /\bPartyPopper\b/);
   assert.doesNotMatch(page, /\bSparkles\b|\bCamera\b|\bMusic2\b|\bUsersRound\b/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page, /SkeletonPreview/);
