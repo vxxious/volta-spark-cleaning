@@ -42,6 +42,10 @@ test("ships product metadata and removes starter dependencies", async () => {
   assert.match(layout, /Professional Cleaning in Lagos/);
   assert.match(layout, /\/og\.png/);
   assert.match(page, /wa\.me\/\$\{WHATSAPP_NUMBER\}/);
+  assert.match(page, /brandIcons\.instagram/);
+  assert.match(page, /brandIcons\.tiktok/);
+  assert.match(page, /brandIcons\.facebook/);
+  assert.doesNotMatch(page, /\bSparkles\b|\bCamera\b|\bMusic2\b|\bUsersRound\b/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page, /SkeletonPreview/);
 });
