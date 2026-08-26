@@ -23,9 +23,12 @@ test("server-renders the Volta Spark booking experience", async () => {
 
   const html = await response.text();
   assert.match(html, /Volta Spark/);
-  assert.match(html, /More shine/);
+  assert.match(html, /A cleaner space/);
+  assert.match(html, /without the stress/);
   assert.match(html, /Quick booking/);
+  assert.match(html, /Start your booking here/);
   assert.match(html, /2348035496228/);
+  assert.doesNotMatch(html, /clean-rings|orbit|why-visual/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/i);
 });
 

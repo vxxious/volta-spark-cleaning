@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: "website",
       locale: "en_NG",
-      images: [{ url: new URL("/og.png", metadataBase).toString(), width: 1731, height: 909, alt: "Volta Spark cleaning services in Lagos" }],
+      images: [{ url: new URL("/og.png", metadataBase).toString(), width: 1736, height: 906, alt: "Volta Spark cleaning services in Lagos" }],
     },
     twitter: { card: "summary_large_image", title, description, images: [new URL("/og.png", metadataBase).toString()] },
   };
