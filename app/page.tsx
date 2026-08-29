@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -10,6 +9,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { BookingForm } from "../components/booking-form";
+import { BrandMarquee } from "../components/brand-marquee";
+import { HeroVisual } from "../components/hero-visual";
 import { ServiceGrid } from "../components/service-grid";
 import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
 
@@ -36,17 +37,7 @@ export default async function HomePage({
           <p className="hero-footnote"><Check size={16} aria-hidden="true" /> Request a quote with no payment upfront</p>
         </div>
 
-        <figure className="hero-photo-wrap">
-          <Image
-            className="hero-photo"
-            src="/volta-spark-cleaner.jpg"
-            alt="A professional cleaner mopping a bright living room"
-            width={1800}
-            height={1013}
-            priority
-            sizes="(max-width: 760px) 100vw, 54vw"
-          />
-        </figure>
+        <HeroVisual />
       </section>
 
       <section className="trust-strip" aria-label="What to expect from Volta Spark">
@@ -54,6 +45,8 @@ export default async function HomePage({
         <div><Leaf size={21} aria-hidden="true" /><span><strong>Thoughtful care</strong><small>Products chosen for each space</small></span></div>
         <div><CalendarCheck2 size={21} aria-hidden="true" /><span><strong>Clear timing</strong><small>Your plan is agreed before we arrive</small></span></div>
       </section>
+
+      <BrandMarquee />
 
       <section className="services-section" id="services" aria-labelledby="services-title">
         <div className="section-heading">

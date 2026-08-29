@@ -32,6 +32,8 @@ test("server-renders the complete one-page Volta Spark journey", async () => {
   assert.match(html, /id="about"/);
   assert.match(html, /id="book"/);
   assert.match(html, /href="\/#book"/);
+  assert.match(html, /brand-marquee/);
+  assert.match(html, /hero-visual-services/);
   assert.doesNotMatch(html, /clean-rings|orbit|why-visual/);
   assert.doesNotMatch(html, /section-kicker|page-hero/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/i);
@@ -53,13 +55,17 @@ test("legacy page URLs return visitors to the one-page journey", async () => {
   }
 });
 
-test("ships product metadata and removes starter dependencies", async () => {
-  const [layout, page, bookingForm, siteData, socialLinks, packageJson] = await Promise.all([
+test("ships product metadata, purposeful motion and no starter dependencies", async () => {
+  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, styles, packageJson] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/booking-form.tsx", import.meta.url), "utf8"),
     readFile(new URL("../lib/site-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../components/social-links.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/service-grid.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/hero-visual.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/brand-marquee.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
@@ -73,6 +79,13 @@ test("ships product metadata and removes starter dependencies", async () => {
   assert.match(socialLinks, /Instagram/);
   assert.match(socialLinks, /TikTok/);
   assert.match(socialLinks, /Facebook/);
+  assert.match(serviceGrid, /IntersectionObserver/);
+  assert.match(serviceGrid, /--entry-delay/);
+  assert.match(heroVisual, /requestAnimationFrame/);
+  assert.match(heroVisual, /prefers-reduced-motion/);
+  assert.match(brandMarquee, /visibilitychange/);
+  assert.match(styles, /wordmark-scroll 28s linear infinite/);
+  assert.match(styles, /@keyframes service-enter/);
   assert.doesNotMatch(siteData, /\bPartyPopper\b|\bSparkles\b/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page, /SkeletonPreview/);
