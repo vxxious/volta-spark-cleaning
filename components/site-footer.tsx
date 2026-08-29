@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, MessageCircle } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
 import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
 import { Brand } from "./brand";
@@ -15,9 +15,9 @@ export function SiteFooter() {
           </div>
           <div className="footer-column">
             <strong>Explore</strong>
-            <Link href="/services">Services</Link>
-            <Link href="/about">About us</Link>
-            <Link href="/booking">Book a clean</Link>
+            <Link href="/#services">Services</Link>
+            <Link href="/#about">Why Volta Spark</Link>
+            <Link href="/#book">Book a clean</Link>
           </div>
           <div className="footer-column">
             <strong>Contact</strong>
@@ -39,8 +39,8 @@ export function SiteFooter() {
         </div>
       </footer>
 
-      <Link className="mobile-booking-bar" href="/booking">
-        <MessageCircle size={19} aria-hidden="true" /> Book on WhatsApp
+      <Link className="mobile-booking-bar" href="/#book">
+        Start your booking
         <ArrowRight size={18} aria-hidden="true" />
       </Link>
     </>

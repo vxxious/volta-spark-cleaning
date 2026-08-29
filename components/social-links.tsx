@@ -10,7 +10,7 @@ export function SocialLinks() {
   return (
     <div className="social-links">
       {socialLinks.map(({ label, href }) => (
-        <a href={href} key={label} target="_blank" rel="noreferrer" aria-label={label}>
+        <a href={href} key={label} target="_blank" rel="noreferrer" aria-label={`${label} (opens in a new tab)`}>
           <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
             <path d={brandPaths[label]} fill="currentColor" />
           </svg>

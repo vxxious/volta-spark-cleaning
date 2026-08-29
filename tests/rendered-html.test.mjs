@@ -16,7 +16,7 @@ async function render(path = "/") {
   );
 }
 
-test("server-renders the Volta Spark home page", async () => {
+test("server-renders the complete one-page Volta Spark journey", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -25,24 +25,31 @@ test("server-renders the Volta Spark home page", async () => {
   assert.match(html, /Volta Spark/);
   assert.match(html, /A cleaner space/);
   assert.match(html, /without the stress/);
-  assert.match(html, /Popular services/);
-  assert.match(html, /href="\/booking"/);
+  assert.match(html, /Choose the clean your space needs/);
+  assert.match(html, /Careful work\. Clear communication/);
+  assert.match(html, /Tell us what needs cleaning/);
+  assert.match(html, /id="services"/);
+  assert.match(html, /id="about"/);
+  assert.match(html, /id="book"/);
+  assert.match(html, /href="\/#book"/);
   assert.doesNotMatch(html, /clean-rings|orbit|why-visual/);
+  assert.doesNotMatch(html, /section-kicker|page-hero/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/i);
 });
 
-test("serves distinct services, about, booking and contact pages", async () => {
+test("legacy page URLs return visitors to the one-page journey", async () => {
   const expectations = [
-    ["/services", /Cleaning that fits your space and schedule/],
-    ["/about", /We take care of the mess/],
-    ["/booking", /Start your request/],
-    ["/contact", /Let us talk about your space/],
+    ["/services", "/#services"],
+    ["/about", "/#about"],
+    ["/booking", "/#book"],
+    ["/contact", "/#book"],
   ];
 
-  for (const [path, expectedCopy] of expectations) {
+  for (const [path, expectedLocation] of expectations) {
     const response = await render(path);
-    assert.equal(response.status, 200, `${path} should render`);
-    assert.match(await response.text(), expectedCopy);
+    assert.ok([307, 308].includes(response.status), `${path} should redirect`);
+    const redirectUrl = new URL(response.headers.get("location"), "https://voltaspark.example");
+    assert.equal(redirectUrl.pathname + redirectUrl.hash, expectedLocation);
   }
 });
 
@@ -60,6 +67,7 @@ test("ships product metadata and removes starter dependencies", async () => {
   assert.match(layout, /\/og\.png/);
   assert.match(layout, /SiteHeader/);
   assert.match(layout, /SiteFooter/);
+  assert.match(layout, /Skip to main content/);
   assert.match(bookingForm, /wa\.me\/\$\{WHATSAPP_NUMBER\}/);
   assert.match(siteData, /icon: RefreshCcw/);
   assert.match(socialLinks, /Instagram/);

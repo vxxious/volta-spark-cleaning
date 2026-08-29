@@ -39,8 +39,9 @@ export function BookingForm({ initialService }: { initialService?: string }) {
 
   return (
     <form className="booking-form" onSubmit={handleBooking}>
-      <fieldset>
+      <fieldset aria-describedby="service-help">
         <legend>Choose a service</legend>
+        <p className="field-help" id="service-help">Select the closest match. We can adjust it with you on WhatsApp.</p>
         <div className="service-picker">
           {services.map((service) => {
             const Icon = service.icon;
@@ -65,7 +66,7 @@ export function BookingForm({ initialService }: { initialService?: string }) {
       <fieldset>
         <legend>Your details</legend>
         <div className="form-grid">
-          <label>Your name<input name="name" placeholder="e.g. Ada" required autoComplete="name" /></label>
+          <label>Your name<input name="name" placeholder="e.g. Ada" required autoComplete="name" maxLength={80} /></label>
           <label>
             Property type
             <select name="property" defaultValue="" required>
@@ -77,11 +78,11 @@ export function BookingForm({ initialService }: { initialService?: string }) {
               <option>Construction site</option>
             </select>
           </label>
-          <label>Area in Lagos<input name="area" placeholder="e.g. Magodo" required autoComplete="address-level2" /></label>
+          <label>Area in Lagos<input name="area" placeholder="e.g. Magodo" required autoComplete="address-level2" maxLength={100} /></label>
           <label>Preferred date <span className="optional">Optional</span><input name="date" type="date" /></label>
           <label className="full-width">
             Extra details <span className="optional">Optional</span>
-            <textarea name="notes" placeholder="Number of rooms, preferred time, or anything we should know" rows={3} />
+            <textarea name="notes" placeholder="Number of rooms, preferred time, or anything we should know" rows={3} maxLength={500} />
           </label>
         </div>
       </fieldset>

@@ -2,95 +2,105 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  CalendarDays,
+  CalendarCheck2,
   Check,
   Leaf,
+  MapPin,
   MessageCircle,
   ShieldCheck,
 } from "lucide-react";
+import { BookingForm } from "../components/booking-form";
 import { ServiceGrid } from "../components/service-grid";
-import { WHATSAPP_NUMBER } from "../lib/site-data";
+import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string }>;
+}) {
+  const { service } = await searchParams;
+
   return (
-    <main>
+    <main id="main-content">
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy-panel">
-          <p className="eyebrow">Professional cleaning in Lagos</p>
+          <p className="hero-location"><MapPin size={17} aria-hidden="true" /> Cleaning homes and businesses across Lagos</p>
           <h1 id="hero-title">A cleaner space,<span>without the stress.</span></h1>
-          <p className="hero-copy">Reliable home, office and short-let cleaning, booked in minutes and handled with care.</p>
+          <p className="hero-copy">Careful home, office and short-let cleaning from a team you can reach directly.</p>
           <div className="hero-actions">
-            <Link className="primary-button" href="/booking">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
+            <Link className="primary-button" href="#book">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
             <a className="text-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
-              <MessageCircle size={18} aria-hidden="true" /> Chat with us
+              <MessageCircle size={18} aria-hidden="true" /> Chat on WhatsApp
             </a>
           </div>
-          <p className="hero-footnote"><Check size={16} aria-hidden="true" /> No payment required to request a quote</p>
+          <p className="hero-footnote"><Check size={16} aria-hidden="true" /> Request a quote with no payment upfront</p>
         </div>
 
         <figure className="hero-photo-wrap">
           <Image
             className="hero-photo"
             src="/volta-spark-cleaner.jpg"
-            alt="A cleaner mopping a bright, modern living room"
+            alt="A professional cleaner mopping a bright living room"
             width={1800}
             height={1013}
             priority
-            sizes="(max-width: 760px) 100vw, 56vw"
+            sizes="(max-width: 760px) 100vw, 54vw"
           />
-          <figcaption>
-            <ShieldCheck size={20} aria-hidden="true" />
-            <span><strong>Care you can count on</strong><small>For homes and businesses across Lagos</small></span>
-          </figcaption>
         </figure>
       </section>
 
-      <section className="trust-strip" aria-label="Volta Spark service promises">
-        <div><ShieldCheck size={20} aria-hidden="true" /><span><strong>Trained and trusted</strong><small>A reliable cleaning team</small></span></div>
-        <div><Leaf size={20} aria-hidden="true" /><span><strong>Eco-conscious</strong><small>Thoughtful product choices</small></span></div>
-        <div><CalendarDays size={20} aria-hidden="true" /><span><strong>Reliable timing</strong><small>Planned around your day</small></span></div>
+      <section className="trust-strip" aria-label="What to expect from Volta Spark">
+        <div><ShieldCheck size={21} aria-hidden="true" /><span><strong>Trusted team</strong><small>Trained and background-checked</small></span></div>
+        <div><Leaf size={21} aria-hidden="true" /><span><strong>Thoughtful care</strong><small>Products chosen for each space</small></span></div>
+        <div><CalendarCheck2 size={21} aria-hidden="true" /><span><strong>Clear timing</strong><small>Your plan is agreed before we arrive</small></span></div>
       </section>
 
-      <section className="services-section" aria-labelledby="home-services-title">
+      <section className="services-section" id="services" aria-labelledby="services-title">
         <div className="section-heading">
-          <div><p className="section-kicker">Popular services</p><h2 id="home-services-title">The right clean for your space.</h2></div>
-          <div className="section-heading-action">
-            <p>Explore the full service range and choose the clean that fits your space.</p>
-            <Link className="text-link" href="/services">View all services <ArrowRight size={17} aria-hidden="true" /></Link>
+          <h2 id="services-title">Choose the clean your space needs.</h2>
+          <p>From regular upkeep to a full reset, select a service to begin your request.</p>
+        </div>
+        <ServiceGrid />
+      </section>
+
+      <section className="about-section" id="about" aria-labelledby="about-title">
+        <div className="about-heading">
+          <h2 id="about-title">Careful work. Clear communication. No complicated process.</h2>
+          <p>Volta Spark serves homes, offices, guest spaces and newly completed properties across Lagos.</p>
+        </div>
+        <div className="standards-list">
+          <article>
+            <h3>People you can trust</h3>
+            <p>A trained team that respects your property, privacy and time.</p>
+          </article>
+          <article>
+            <h3>A clean shaped around your space</h3>
+            <p>We agree what needs attention before work begins, so expectations stay clear.</p>
+          </article>
+          <article>
+            <h3>Direct support from start to finish</h3>
+            <p>Your request, quote and appointment are confirmed with our team on WhatsApp.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="booking-section" id="book" aria-labelledby="booking-title">
+        <div className="booking-intro">
+          <h2 id="booking-title">Tell us what needs cleaning.</h2>
+          <p>Complete the short form and review your prepared request in WhatsApp before sending.</p>
+
+          <ol className="booking-steps" id="process">
+            <li><span>1</span><div><strong>Choose your service</strong><small>Select the closest match for your space.</small></div></li>
+            <li><span>2</span><div><strong>Add the essentials</strong><small>Your name, area, property and preferred date.</small></div></li>
+            <li><span>3</span><div><strong>Confirm on WhatsApp</strong><small>We agree availability and your quote directly.</small></div></li>
+          </ol>
+
+          <div className="booking-contact">
+            <MessageCircle size={21} aria-hidden="true" />
+            <span><small>Prefer to chat now?</small><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">{DISPLAY_PHONE}</a></span>
           </div>
         </div>
-        <ServiceGrid limit={3} />
-      </section>
-
-      <section className="why-section" aria-labelledby="home-why-title">
-        <div className="why-heading">
-          <p className="section-kicker">Why Volta Spark</p>
-          <h2 id="home-why-title">A straightforward service, done properly.</h2>
-          <p>Clear communication, careful work and a team that respects your space from arrival to finish.</p>
-          <Link className="text-link" href="/about">Learn about us <ArrowRight size={17} aria-hidden="true" /></Link>
-        </div>
-        <div className="benefit-list">
-          <article><span className="benefit-number">01</span><div><h3>People you can trust</h3><p>A trained and background-checked team for homes, offices and guest spaces.</p></div></article>
-          <article><span className="benefit-number">02</span><div><h3>Careful product choices</h3><p>Effective products selected with your comfort and each surface in mind.</p></div></article>
-          <article><span className="benefit-number">03</span><div><h3>Communication that is clear</h3><p>Your service, quote and timing are agreed before the clean begins.</p></div></article>
-        </div>
-      </section>
-
-      <section className="process-section" aria-labelledby="process-title">
-        <div className="section-heading process-heading">
-          <div><p className="section-kicker">How it works</p><h2 id="process-title">From request to spotless.</h2></div>
-          <p>No account, complicated checkout or back-and-forth forms.</p>
-        </div>
-        <ol className="process-grid">
-          <li><span>1</span><h3>Send your request</h3><p>Choose a service, add your details and continue to WhatsApp.</p></li>
-          <li><span>2</span><h3>Confirm the plan</h3><p>We agree the quote, date, arrival time and access details with you.</p></li>
-          <li><span>3</span><h3>Enjoy your clean space</h3><p>Our team handles the work while you get your time and comfort back.</p></li>
-        </ol>
-      </section>
-
-      <section className="final-cta" aria-labelledby="home-cta-title">
-        <div><p className="section-kicker section-kicker-light">Ready when you are</p><h2 id="home-cta-title">Your cleaner space starts here.</h2></div>
-        <Link className="primary-button primary-button-light" href="/booking">Book your clean <ArrowRight size={19} aria-hidden="true" /></Link>
+        <BookingForm initialService={service} />
       </section>
     </main>
   );
