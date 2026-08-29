@@ -1,0 +1,48 @@
+import { ArrowRight, MapPin, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
+import { Brand } from "./brand";
+import { SocialLinks } from "./social-links";
+
+export function SiteFooter() {
+  return (
+    <>
+      <footer>
+        <div className="footer-main">
+          <div className="footer-brand">
+            <Brand />
+            <p>Professional cleaning for homes, offices and short-lets across Lagos.</p>
+          </div>
+          <div className="footer-column">
+            <strong>Explore</strong>
+            <Link href="/services">Services</Link>
+            <Link href="/about">About us</Link>
+            <Link href="/booking">Book a clean</Link>
+          </div>
+          <div className="footer-column">
+            <strong>Contact</strong>
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">{DISPLAY_PHONE}</a>
+            <span><MapPin size={15} aria-hidden="true" /> Lagos, Nigeria</span>
+          </div>
+          <div className="footer-social">
+            <strong>Follow</strong>
+            <SocialLinks />
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>Copyright 2026 Volta Spark Cleaning Services</span>
+          <a
+            href="https://unsplash.com/photos/a-woman-mops-a-bright-modern-living-room-floor-2NcTLdFHpH8"
+            target="_blank"
+            rel="noreferrer"
+          >Photography by Vitaly Gariev</a>
+        </div>
+      </footer>
+
+      <Link className="mobile-booking-bar" href="/booking">
+        <MessageCircle size={19} aria-hidden="true" /> Book on WhatsApp
+        <ArrowRight size={18} aria-hidden="true" />
+      </Link>
+    </>
+  );
+}
