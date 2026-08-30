@@ -228,8 +228,7 @@ main {
 
 .nav-cta,
 .primary-button,
-.whatsapp-button,
-.mobile-booking-bar {
+.whatsapp-button {
   align-items: center;
   border: 0;
   display: inline-flex;
@@ -1041,10 +1040,6 @@ footer {
   padding-top: 22px;
 }
 
-.mobile-booking-bar {
-  display: none;
-}
-
 .nav-cta,
 .primary-button,
 .text-link,
@@ -1054,7 +1049,6 @@ footer {
 .footer-column a,
 .footer-social a,
 .back-link,
-.mobile-booking-bar,
 .mobile-navigation > button {
   transition-duration: 180ms;
   transition-property: background-color, border-color, color, box-shadow, opacity, transform;
@@ -1066,7 +1060,6 @@ footer {
 .service-picker button:active,
 .whatsapp-button:active,
 .footer-social a:active,
-.mobile-booking-bar:active,
 .mobile-navigation > button:active {
   transform: scale(0.97);
 }
@@ -1380,18 +1373,6 @@ footer {
     gap: 10px;
   }
 
-  .mobile-booking-bar {
-    background: var(--accent);
-    bottom: max(10px, env(safe-area-inset-bottom));
-    box-shadow: 0 8px 25px rgba(2, 18, 12, 0.28);
-    color: var(--bg-deep);
-    display: flex;
-    gap: 10px;
-    inset-inline: 12px;
-    min-height: 54px;
-    position: fixed;
-    z-index: 50;
-  }
 }
 
 @media (max-width: 430px) {
@@ -1425,7 +1406,6 @@ footer {
   .whatsapp-button,
   .footer-column a,
   .footer-social a,
-  .mobile-booking-bar,
   .mobile-navigation > button,
   .skip-link {
     transition: none;
@@ -1446,8 +1426,7 @@ footer {
 }
 
 @media (forced-colors: active) {
-  .service-picker button.active,
-  .mobile-booking-bar {
+  .service-picker button.active {
     border: 2px solid ButtonText;
   }
 }

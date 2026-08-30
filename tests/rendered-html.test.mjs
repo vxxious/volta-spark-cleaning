@@ -31,6 +31,7 @@ test("server-renders the focused Volta Spark homepage", async () => {
   assert.match(html, /id="about"/);
   assert.match(html, /href="\/booking"/);
   assert.doesNotMatch(html, /id="book"|<form\b/);
+  assert.doesNotMatch(html, /mobile-booking-bar|Start your booking/);
   assert.match(html, /brand-marquee/);
   assert.match(html, /hero-visual-services/);
   assert.doesNotMatch(html, /clean-rings|orbit|why-visual/);
