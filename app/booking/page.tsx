@@ -5,9 +5,21 @@ import { BookingForm } from "../../components/booking-form";
 import { WhatsAppIcon } from "../../components/whatsapp-icon";
 import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../../lib/site-data";
 
+const bookingTitle = "Book a Cleaning in Lagos | Volta Spark";
+const bookingDescription = "Request a home, office, post-construction, move-in or short-let cleaning quote from Volta Spark in Lagos.";
 export const metadata: Metadata = {
-  title: "Book a Cleaning | Volta Spark",
-  description: "Request a home, office, post-construction or short-let cleaning quote from Volta Spark in Lagos.",
+  title: bookingTitle,
+  description: bookingDescription,
+  alternates: { canonical: "/booking" },
+  openGraph: {
+    title: bookingTitle,
+    description: bookingDescription,
+    url: "/booking",
+    type: "website",
+    locale: "en_NG",
+    images: [{ url: "/og-image.jpg", width: 1736, height: 906, alt: "Book Volta Spark cleaning services in Lagos" }],
+  },
+  twitter: { card: "summary_large_image", title: bookingTitle, description: bookingDescription, images: ["/og-image.jpg"] },
 };
 
 export default async function BookingPage({

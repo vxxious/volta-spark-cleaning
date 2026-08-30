@@ -4,11 +4,50 @@ import { BrandMarquee } from "../components/brand-marquee";
 import { HeroVisual } from "../components/hero-visual";
 import { ServiceGrid } from "../components/service-grid";
 import { WhatsAppIcon } from "../components/whatsapp-icon";
-import { WHATSAPP_NUMBER } from "../lib/site-data";
+import { DISPLAY_PHONE, services, SITE_URL, socialLinks, WHATSAPP_NUMBER } from "../lib/site-data";
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": `${SITE_URL}/#business`,
+        name: "Volta Spark Cleaning Services",
+        description: "Professional cleaning for homes, offices, short lets and post-construction spaces across Lagos.",
+        url: SITE_URL,
+        image: `${SITE_URL}/og-image.jpg`,
+        logo: `${SITE_URL}/favicon.jpg`,
+        telephone: DISPLAY_PHONE,
+        address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
+        areaServed: { "@type": "City", name: "Lagos" },
+        sameAs: socialLinks.map((social) => social.href),
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Cleaning services",
+          itemListElement: services.map((service) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: service.name, description: service.description },
+          })),
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "Volta Spark Cleaning Services",
+        inLanguage: "en-NG",
+        publisher: { "@id": `${SITE_URL}/#business` },
+      },
+    ],
+  };
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+      />
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy-panel">
           <h1 id="hero-title">A cleaner space,<span>without the stress.</span></h1>

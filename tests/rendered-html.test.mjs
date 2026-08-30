@@ -66,6 +66,32 @@ test("booking renders as a dedicated page", async () => {
   assert.doesNotMatch(html, /redirect/);
 });
 
+test("publishes canonical, structured and crawl-discovery metadata", async () => {
+  const [homeResponse, bookingResponse, robotsResponse, sitemapResponse] = await Promise.all([
+    render("/"),
+    render("/booking"),
+    render("/robots.txt"),
+    render("/sitemap.xml"),
+  ]);
+
+  const [homeHtml, bookingHtml, robotsText, sitemapText] = await Promise.all([
+    homeResponse.text(),
+    bookingResponse.text(),
+    robotsResponse.text(),
+    sitemapResponse.text(),
+  ]);
+
+  assert.match(homeHtml, /rel="canonical" href="https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site"/);
+  assert.match(homeHtml, /application\/ld\+json/);
+  assert.match(homeHtml, /LocalBusiness/);
+  assert.match(bookingHtml, /rel="canonical" href="https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site\/booking"/);
+  assert.equal(robotsResponse.status, 200);
+  assert.match(robotsText, /Sitemap: https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site\/sitemap\.xml/);
+  assert.equal(sitemapResponse.status, 200);
+  assert.match(sitemapText, /<loc>https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site<\/loc>/);
+  assert.match(sitemapText, /<loc>https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site\/booking<\/loc>/);
+});
+
 test("ships product metadata, purposeful motion and no starter dependencies", async () => {
   const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, whatsappIcon, styles, packageJson] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
