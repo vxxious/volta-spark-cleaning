@@ -1,0 +1,22 @@
+# Volta Spark Cleaning Services
+
+> Professional cleaning services for homes, offices, short lets and post-construction spaces across Lagos, Nigeria.
+
+## Primary pages
+
+- [Home](https://voltasparkcleaning.vercel.app/): Service information, company standards and contact details.
+- [Book a cleaning](https://voltasparkcleaning.vercel.app/booking): Prepare a cleaning request and continue to WhatsApp.
+
+## Services
+
+- Home cleaning
+- Deep cleaning
+- Office and commercial cleaning
+- Post-construction cleaning
+- Move-in and move-out cleaning
+- Event and short-let resets
+
+## Contact
+
+- WhatsApp: https://wa.me/2348035496228
+- Service area: Lagos, Nigeria

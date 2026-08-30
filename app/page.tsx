@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BrandMarquee } from "../components/brand-marquee";
@@ -5,6 +6,25 @@ import { HeroVisual } from "../components/hero-visual";
 import { ServiceGrid } from "../components/service-grid";
 import { WhatsAppIcon } from "../components/whatsapp-icon";
 import { DISPLAY_PHONE, services, SITE_URL, socialLinks, WHATSAPP_NUMBER } from "../lib/site-data";
+
+const homeTitle = "Volta Spark | Professional Cleaning in Lagos";
+const homeDescription = "Book reliable home, office, post-construction, move-in and event cleaning in Lagos. Send your request directly to Volta Spark on WhatsApp.";
+
+export const metadata: Metadata = {
+  title: homeTitle,
+  description: homeDescription,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: homeTitle,
+    description: homeDescription,
+    url: "/",
+    siteName: "Volta Spark Cleaning Services",
+    type: "website",
+    locale: "en_NG",
+    images: [{ url: "/og-image.jpg", width: 1736, height: 906, alt: "Volta Spark cleaning services in Lagos" }],
+  },
+  twitter: { card: "summary_large_image", title: homeTitle, description: homeDescription, images: ["/og-image.jpg"] },
+};
 
 export default function HomePage() {
   const structuredData = {

@@ -41,6 +41,7 @@ export default defineConfig(async () => {
     const { nitro } = await import("nitro/vite");
 
     return {
+      build: { sourcemap: false },
       plugins: [vinext(), nitro()],
     };
   }
@@ -55,6 +56,7 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    build: { sourcemap: false },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,

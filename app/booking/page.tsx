@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { BookingForm } from "../../components/booking-form";
+import { Breadcrumbs } from "../../components/breadcrumbs";
 import { WhatsAppIcon } from "../../components/whatsapp-icon";
-import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../../lib/site-data";
+import { DISPLAY_PHONE, SITE_URL, WHATSAPP_NUMBER } from "../../lib/site-data";
 
 const bookingTitle = "Book a Cleaning in Lagos | Volta Spark";
 const bookingDescription = "Request a home, office, post-construction, move-in or short-let cleaning quote from Volta Spark in Lagos.";
@@ -28,12 +27,24 @@ export default async function BookingPage({
   searchParams: Promise<{ service?: string }>;
 }) {
   const { service } = await searchParams;
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Book a cleaning", item: `${SITE_URL}/booking` },
+    ],
+  };
 
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData).replace(/</g, "\\u003c") }}
+      />
       <section className="booking-section booking-page" aria-labelledby="booking-title">
         <div className="booking-intro">
-          <Link className="back-link" href="/"><ArrowLeft size={16} aria-hidden="true" /> Back to home</Link>
+          <Breadcrumbs current="Book a cleaning" />
           <h1 id="booking-title">Book your clean.</h1>
           <p>Share the essentials, then review your prepared request in WhatsApp before sending.</p>
 

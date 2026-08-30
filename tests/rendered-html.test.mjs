@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render(path = "/") {
@@ -67,16 +67,18 @@ test("booking renders as a dedicated page", async () => {
 });
 
 test("publishes canonical, structured and crawl-discovery metadata", async () => {
-  const [homeResponse, bookingResponse, robotsResponse, sitemapResponse] = await Promise.all([
+  const [homeResponse, bookingResponse, notFoundResponse, robotsResponse, sitemapResponse] = await Promise.all([
     render("/"),
     render("/booking"),
+    render("/definitely-missing"),
     render("/robots.txt"),
     render("/sitemap.xml"),
   ]);
 
-  const [homeHtml, bookingHtml, robotsText, sitemapText] = await Promise.all([
+  const [homeHtml, bookingHtml, notFoundHtml, robotsText, sitemapText] = await Promise.all([
     homeResponse.text(),
     bookingResponse.text(),
+    notFoundResponse.text(),
     robotsResponse.text(),
     sitemapResponse.text(),
   ]);
@@ -85,6 +87,13 @@ test("publishes canonical, structured and crawl-discovery metadata", async () =>
   assert.match(homeHtml, /application\/ld\+json/);
   assert.match(homeHtml, /LocalBusiness/);
   assert.match(bookingHtml, /rel="canonical" href="https:\/\/voltasparkcleaning\.vercel\.app\/booking"/);
+  assert.match(bookingHtml, /aria-label="Breadcrumb"/);
+  assert.match(bookingHtml, /BreadcrumbList/);
+  assert.equal(notFoundResponse.status, 404);
+  assert.match(notFoundHtml, /This page is not here/);
+  assert.match(notFoundHtml, /Page Not Found \| Volta Spark/);
+  assert.match(notFoundHtml, /name="robots" content="noindex"/);
+  assert.doesNotMatch(notFoundHtml, /rel="canonical"/);
   assert.equal(robotsResponse.status, 200);
   assert.match(robotsText, /Sitemap: https:\/\/voltasparkcleaning\.vercel\.app\/sitemap\.xml/);
   assert.equal(sitemapResponse.status, 200);
@@ -93,7 +102,7 @@ test("publishes canonical, structured and crawl-discovery metadata", async () =>
 });
 
 test("ships product metadata, purposeful motion and no starter dependencies", async () => {
-  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, whatsappIcon, styles, packageJson] = await Promise.all([
+  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, whatsappIcon, styles, packageJson, viteConfig, llmsText, publicFiles] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/booking-form.tsx", import.meta.url), "utf8"),
@@ -105,10 +114,13 @@ test("ships product metadata, purposeful motion and no starter dependencies", as
     readFile(new URL("../components/whatsapp-icon.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
+    readFile(new URL("../public/llms.txt", import.meta.url), "utf8"),
+    readdir(new URL("../public", import.meta.url)),
   ]);
 
-  assert.match(layout, /Professional Cleaning in Lagos/);
-  assert.match(layout, /\/og-image\.jpg/);
+  assert.match(page, /Professional Cleaning in Lagos/);
+  assert.match(page, /\/og-image\.jpg/);
   assert.match(layout, /\/favicon\.jpg/);
   assert.doesNotMatch(layout, /\/og\.png|favicon\.svg/);
   assert.match(layout, /@fontsource-variable\/archivo/);
@@ -127,10 +139,14 @@ test("ships product metadata, purposeful motion and no starter dependencies", as
   assert.match(serviceGrid, /--entry-delay/);
   assert.match(heroVisual, /requestAnimationFrame/);
   assert.match(heroVisual, /prefers-reduced-motion/);
+  assert.doesNotMatch(heroVisual, /from "next\/image"/);
   assert.match(brandMarquee, /visibilitychange/);
   assert.match(styles, /wordmark-scroll 28s linear infinite/);
   assert.match(styles, /@keyframes service-enter/);
   assert.doesNotMatch(siteData, /\bPartyPopper\b|\bSparkles\b/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page, /SkeletonPreview/);
+  assert.match(viteConfig, /sourcemap: false/);
+  assert.match(llmsText, /Volta Spark Cleaning Services/);
+  assert.ok(!publicFiles.some((file) => ["file.svg", "globe.svg", "window.svg"].includes(file)));
 });

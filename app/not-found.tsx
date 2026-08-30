@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Page Not Found | Volta Spark",
+  description: "The page you requested could not be found. Return to Volta Spark or book a cleaning service in Lagos.",
+};
+
+export default function NotFound() {
+  return (
+    <main id="main-content">
+      <section className="not-found-section" aria-labelledby="not-found-title">
+        <div className="not-found-layout">
+          <p className="not-found-code" aria-hidden="true">404</p>
+          <div className="not-found-copy">
+            <h1 id="not-found-title">This page is not here.</h1>
+            <p>The link may have changed. Return home or continue directly to the cleaning request page.</p>
+            <div className="not-found-actions">
+              <Link className="primary-button" href="/">Return home</Link>
+              <Link className="text-link" href="/booking">Book a cleaning <ArrowRight size={18} aria-hidden="true" /></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

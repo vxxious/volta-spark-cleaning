@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 export function HeroVisual() {
@@ -74,14 +73,16 @@ export function HeroVisual() {
   return (
     <figure className="hero-photo-wrap" ref={figureRef}>
       <div className="hero-image-layer" ref={imageLayerRef}>
-        <Image
+        {/* This optimized local asset avoids adding the next/image runtime to the parallax client bundle. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           className="hero-photo"
           src="/volta-spark-cleaner.jpg"
           alt="A professional cleaner mopping a bright living room"
           width={1800}
           height={1013}
-          priority
-          sizes="(max-width: 760px) 100vw, 54vw"
+          decoding="async"
+          fetchPriority="high"
         />
       </div>
       <span className="hero-visual-label hero-visual-location" ref={locationLayerRef}>Lagos, Nigeria</span>
