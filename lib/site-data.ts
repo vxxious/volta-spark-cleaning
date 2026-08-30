@@ -1,4 +1,4 @@
-export const SITE_URL = "https://volta-spark-cleaning.omohoshoze2.chatgpt.site";
+export const SITE_URL = "https://voltasparkcleaning.vercel.app";
 export const WHATSAPP_NUMBER = "2348035496228";
 export const DISPLAY_PHONE = "+234 803 549 6228";
 

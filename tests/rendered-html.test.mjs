@@ -81,15 +81,15 @@ test("publishes canonical, structured and crawl-discovery metadata", async () =>
     sitemapResponse.text(),
   ]);
 
-  assert.match(homeHtml, /rel="canonical" href="https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site"/);
+  assert.match(homeHtml, /rel="canonical" href="https:\/\/voltasparkcleaning\.vercel\.app"/);
   assert.match(homeHtml, /application\/ld\+json/);
   assert.match(homeHtml, /LocalBusiness/);
-  assert.match(bookingHtml, /rel="canonical" href="https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site\/booking"/);
+  assert.match(bookingHtml, /rel="canonical" href="https:\/\/voltasparkcleaning\.vercel\.app\/booking"/);
   assert.equal(robotsResponse.status, 200);
-  assert.match(robotsText, /Sitemap: https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site\/sitemap\.xml/);
+  assert.match(robotsText, /Sitemap: https:\/\/voltasparkcleaning\.vercel\.app\/sitemap\.xml/);
   assert.equal(sitemapResponse.status, 200);
-  assert.match(sitemapText, /<loc>https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site<\/loc>/);
-  assert.match(sitemapText, /<loc>https:\/\/volta-spark-cleaning\.omohoshoze2\.chatgpt\.site\/booking<\/loc>/);
+  assert.match(sitemapText, /<loc>https:\/\/voltasparkcleaning\.vercel\.app<\/loc>/);
+  assert.match(sitemapText, /<loc>https:\/\/voltasparkcleaning\.vercel\.app\/booking<\/loc>/);
 });
 
 test("ships product metadata, purposeful motion and no starter dependencies", async () => {
