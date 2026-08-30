@@ -39,7 +39,7 @@ export function BookingForm({ initialService }: { initialService?: string }) {
   }
 
   return (
-    <form className="booking-form" onSubmit={handleBooking}>
+    <form className="booking-form" id="booking-form" onSubmit={handleBooking}>
       <fieldset aria-describedby="service-help">
         <legend>Choose a service</legend>
         <p className="field-help" id="service-help">Select the closest match. We can adjust it with you on WhatsApp.</p>

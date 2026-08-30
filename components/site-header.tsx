@@ -8,7 +8,6 @@ import { Brand } from "./brand";
 const navigation = [
   { label: "Services", href: "/#services" },
   { label: "Why us", href: "/#about" },
-  { label: "How it works", href: "/#process" },
 ] as const;
 
 export function SiteHeader() {
@@ -33,7 +32,7 @@ export function SiteHeader() {
 
       <nav className="desktop-navigation" aria-label="Main navigation">
         {navigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
-        <Link className="nav-cta" href="/#book">
+        <Link className="nav-cta" href="/booking">
           Book a clean <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </nav>
@@ -52,7 +51,7 @@ export function SiteHeader() {
           {navigation.map((item) => (
             <Link href={item.href} key={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>
           ))}
-          <Link className="mobile-nav-cta" href="/#book" onClick={() => setMenuOpen(false)}>Book a clean</Link>
+          <Link className="mobile-nav-cta" href="/booking" onClick={() => setMenuOpen(false)}>Book a clean</Link>
         </nav>
       </div>
     </header>

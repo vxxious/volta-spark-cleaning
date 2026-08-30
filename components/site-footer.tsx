@@ -18,7 +18,7 @@ export function SiteFooter() {
             <strong>Explore</strong>
             <Link href="/#services">Services</Link>
             <Link href="/#about">Why Volta Spark</Link>
-            <Link href="/#book">Book a clean</Link>
+            <Link href="/booking">Book a clean</Link>
           </div>
           <div className="footer-column">
             <strong>Contact</strong>
@@ -40,7 +40,7 @@ export function SiteFooter() {
         </div>
       </footer>
 
-      <Link className="mobile-booking-bar" href="/#book">
+      <Link className="mobile-booking-bar" href="/booking#booking-form">
         Start your booking
         <ArrowRight size={18} aria-hidden="true" />
       </Link>

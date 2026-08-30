@@ -1,19 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { BookingForm } from "../components/booking-form";
 import { BrandMarquee } from "../components/brand-marquee";
 import { HeroVisual } from "../components/hero-visual";
 import { ServiceGrid } from "../components/service-grid";
 import { WhatsAppIcon } from "../components/whatsapp-icon";
-import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
+import { WHATSAPP_NUMBER } from "../lib/site-data";
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ service?: string }>;
-}) {
-  const { service } = await searchParams;
-
+export default function HomePage() {
   return (
     <main id="main-content">
       <section className="hero" aria-labelledby="hero-title">
@@ -23,7 +16,7 @@ export default async function HomePage({
             <p className="hero-copy">Professional cleaning for homes, offices and short lets across Lagos.</p>
             <div>
               <div className="hero-actions">
-                <Link className="primary-button" href="#book">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
+                <Link className="primary-button" href="/booking">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
                 <a className="text-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
                   <WhatsAppIcon width={18} height={18} aria-hidden="true" /> Chat on WhatsApp
                 </a>
@@ -73,24 +66,6 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="booking-section" id="book" aria-labelledby="booking-title">
-        <div className="booking-intro">
-          <h2 id="booking-title">Tell us what needs cleaning.</h2>
-          <p>Complete the short form and review your prepared request in WhatsApp before sending.</p>
-
-          <ol className="booking-steps" id="process">
-            <li><span>01</span><div><strong>Choose your service</strong><small>Select the closest match for your space.</small></div></li>
-            <li><span>02</span><div><strong>Add the essentials</strong><small>Your name, area, property and preferred date.</small></div></li>
-            <li><span>03</span><div><strong>Confirm on WhatsApp</strong><small>We agree availability and your quote directly.</small></div></li>
-          </ol>
-
-          <div className="booking-contact">
-            <WhatsAppIcon width={20} height={20} aria-hidden="true" />
-            <span><small>Prefer to chat now?</small><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">{DISPLAY_PHONE}</a></span>
-          </div>
-        </div>
-        <BookingForm initialService={service} />
-      </section>
     </main>
   );
 }

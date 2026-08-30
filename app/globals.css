@@ -267,7 +267,7 @@ main {
 .hero h1,
 .section-heading h2,
 .about-heading h2,
-.booking-intro h2 {
+.booking-intro h1 {
   letter-spacing: -0.04em;
   margin: 0;
 }
@@ -541,7 +541,7 @@ main {
 
 .section-heading h2,
 .about-heading h2,
-.booking-intro h2 {
+.booking-intro h1 {
   font-size: clamp(44px, 5.5vw, 82px);
   font-weight: 590;
   line-height: 0.98;
@@ -700,12 +700,30 @@ main {
   padding: var(--section-space) var(--gutter);
 }
 
+.booking-page {
+  min-height: 100svh;
+  padding-top: clamp(146px, 13vw, 190px);
+}
+
 .booking-intro {
   align-self: start;
 }
 
-.booking-intro h2 {
+.booking-intro h1 {
   max-width: 10ch;
+}
+
+.back-link {
+  align-items: center;
+  color: var(--ink-dim);
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 620;
+  gap: 8px;
+  letter-spacing: 0.08em;
+  margin-bottom: 38px;
+  min-height: 40px;
+  text-transform: uppercase;
 }
 
 .booking-intro > p {
@@ -1035,6 +1053,7 @@ footer {
 .whatsapp-button,
 .footer-column a,
 .footer-social a,
+.back-link,
 .mobile-booking-bar,
 .mobile-navigation > button {
   transition-duration: 180ms;
@@ -1055,7 +1074,8 @@ footer {
 @media (hover: hover) and (pointer: fine) {
   .desktop-navigation > a:not(.nav-cta):hover,
   .footer-column a:hover,
-  .footer-bottom a:hover {
+  .footer-bottom a:hover,
+  .back-link:hover {
     color: var(--accent);
   }
 
@@ -1274,7 +1294,7 @@ footer {
 
   .section-heading h2,
   .about-heading h2,
-  .booking-intro h2 {
+  .booking-intro h1 {
     font-size: clamp(42px, 12vw, 56px);
   }
 
@@ -1317,6 +1337,10 @@ footer {
   .booking-section {
     gap: 52px;
     padding-inline: 18px;
+  }
+
+  .booking-page {
+    padding-top: 116px;
   }
 
   .booking-intro {

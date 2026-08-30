@@ -16,7 +16,7 @@ async function render(path = "/") {
   );
 }
 
-test("server-renders the complete one-page Volta Spark journey", async () => {
+test("server-renders the focused Volta Spark homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -27,11 +27,10 @@ test("server-renders the complete one-page Volta Spark journey", async () => {
   assert.match(html, /without the stress/);
   assert.match(html, /Cleaning for the way you use your space/);
   assert.match(html, /Careful work\. Clear communication/);
-  assert.match(html, /Tell us what needs cleaning/);
   assert.match(html, /id="services"/);
   assert.match(html, /id="about"/);
-  assert.match(html, /id="book"/);
-  assert.match(html, /href="\/#book"/);
+  assert.match(html, /href="\/booking"/);
+  assert.doesNotMatch(html, /id="book"|<form\b/);
   assert.match(html, /brand-marquee/);
   assert.match(html, /hero-visual-services/);
   assert.doesNotMatch(html, /clean-rings|orbit|why-visual/);
@@ -39,12 +38,11 @@ test("server-renders the complete one-page Volta Spark journey", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/i);
 });
 
-test("legacy page URLs return visitors to the one-page journey", async () => {
+test("legacy content URLs return visitors to the homepage", async () => {
   const expectations = [
     ["/services", "/#services"],
     ["/about", "/#about"],
-    ["/booking", "/#book"],
-    ["/contact", "/#book"],
+    ["/contact", "/booking"],
   ];
 
   for (const [path, expectedLocation] of expectations) {
@@ -53,6 +51,18 @@ test("legacy page URLs return visitors to the one-page journey", async () => {
     const redirectUrl = new URL(response.headers.get("location"), "https://voltaspark.example");
     assert.equal(redirectUrl.pathname + redirectUrl.hash, expectedLocation);
   }
+});
+
+test("booking renders as a dedicated page", async () => {
+  const response = await render("/booking?service=Deep%20cleaning");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Book your clean/);
+  assert.match(html, /id="booking-form"/);
+  assert.match(html, /Deep cleaning/);
+  assert.match(html, /Continue to WhatsApp/);
+  assert.doesNotMatch(html, /redirect/);
 });
 
 test("ships product metadata, purposeful motion and no starter dependencies", async () => {

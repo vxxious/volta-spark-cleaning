@@ -37,7 +37,7 @@ export function ServiceGrid({ limit }: { limit?: number }) {
         return (
           <li key={service.name}>
             <Link
-              href={`/?service=${encodeURIComponent(service.name)}#book`}
+              href={`/booking?service=${encodeURIComponent(service.name)}`}
               className="service-card"
               style={{ "--entry-delay": `${Math.min(index * 60, 300)}ms` } as CSSProperties}
             >
