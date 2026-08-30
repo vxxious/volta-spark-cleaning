@@ -1,8 +1,9 @@
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
 import { Brand } from "./brand";
 import { SocialLinks } from "./social-links";
+import { WhatsAppIcon } from "./whatsapp-icon";
 
 export function SiteFooter() {
   return (
@@ -21,8 +22,8 @@ export function SiteFooter() {
           </div>
           <div className="footer-column">
             <strong>Contact</strong>
-            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">{DISPLAY_PHONE}</a>
-            <span><MapPin size={15} aria-hidden="true" /> Lagos, Nigeria</span>
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer"><WhatsAppIcon width={15} height={15} aria-hidden="true" />{DISPLAY_PHONE}</a>
+            <span>Lagos, Nigeria</span>
           </div>
           <div className="footer-social">
             <strong>Follow</strong>

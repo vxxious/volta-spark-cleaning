@@ -2,8 +2,9 @@
 
 import type { FormEvent } from "react";
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { services, WHATSAPP_NUMBER } from "../lib/site-data";
+import { WhatsAppIcon } from "./whatsapp-icon";
 
 export function BookingForm({ initialService }: { initialService?: string }) {
   const validInitialService = initialService && services.some((service) => service.name === initialService)
@@ -43,8 +44,7 @@ export function BookingForm({ initialService }: { initialService?: string }) {
         <legend>Choose a service</legend>
         <p className="field-help" id="service-help">Select the closest match. We can adjust it with you on WhatsApp.</p>
         <div className="service-picker">
-          {services.map((service) => {
-            const Icon = service.icon;
+          {services.map((service, index) => {
             const selected = selectedService === service.name;
             return (
               <button
@@ -54,9 +54,8 @@ export function BookingForm({ initialService }: { initialService?: string }) {
                 onClick={() => setSelectedService(service.name)}
                 type="button"
               >
-                <Icon size={18} aria-hidden="true" />
+                <span className="service-option-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <span>{service.shortName}</span>
-                {selected && <CheckCircle2 className="selected-check" size={16} aria-hidden="true" />}
               </button>
             );
           })}
@@ -88,7 +87,7 @@ export function BookingForm({ initialService }: { initialService?: string }) {
       </fieldset>
 
       <button className="whatsapp-button" type="submit">
-        <MessageCircle size={20} aria-hidden="true" /> Continue to WhatsApp
+        <WhatsAppIcon width={20} height={20} aria-hidden="true" /> Continue to WhatsApp
         <ArrowRight size={19} aria-hidden="true" />
       </button>
       <p className="form-note">Your details stay here until you choose to send them on WhatsApp.</p>

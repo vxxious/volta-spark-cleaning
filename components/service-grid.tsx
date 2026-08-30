@@ -34,7 +34,6 @@ export function ServiceGrid({ limit }: { limit?: number }) {
   return (
     <ul className="services-grid" ref={gridRef}>
       {visibleServices.map((service, index) => {
-        const Icon = service.icon;
         return (
           <li key={service.name}>
             <Link
@@ -42,7 +41,7 @@ export function ServiceGrid({ limit }: { limit?: number }) {
               className="service-card"
               style={{ "--entry-delay": `${Math.min(index * 60, 300)}ms` } as CSSProperties}
             >
-              <span className="service-icon"><Icon size={22} strokeWidth={1.8} aria-hidden="true" /></span>
+              <span className="service-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               <span className="service-copy">
                 <strong>{service.name}</strong>
                 <span>{service.description}</span>

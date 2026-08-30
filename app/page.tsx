@@ -1,17 +1,10 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  CalendarCheck2,
-  Check,
-  Leaf,
-  MapPin,
-  MessageCircle,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { BookingForm } from "../components/booking-form";
 import { BrandMarquee } from "../components/brand-marquee";
 import { HeroVisual } from "../components/hero-visual";
 import { ServiceGrid } from "../components/service-grid";
+import { WhatsAppIcon } from "../components/whatsapp-icon";
 import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
 
 export default async function HomePage({
@@ -25,33 +18,36 @@ export default async function HomePage({
     <main id="main-content">
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy-panel">
-          <p className="hero-location"><MapPin size={17} aria-hidden="true" /> Cleaning homes and businesses across Lagos</p>
           <h1 id="hero-title">A cleaner space,<span>without the stress.</span></h1>
-          <p className="hero-copy">Careful home, office and short-let cleaning from a team you can reach directly.</p>
-          <div className="hero-actions">
-            <Link className="primary-button" href="#book">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
-            <a className="text-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
-              <MessageCircle size={18} aria-hidden="true" /> Chat on WhatsApp
-            </a>
+          <div className="hero-foot">
+            <p className="hero-copy">Professional cleaning for homes, offices and short lets across Lagos.</p>
+            <div>
+              <div className="hero-actions">
+                <Link className="primary-button" href="#book">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
+                <a className="text-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
+                  <WhatsAppIcon width={18} height={18} aria-hidden="true" /> Chat on WhatsApp
+                </a>
+              </div>
+              <p className="hero-footnote">Request a quote with no payment upfront</p>
+            </div>
           </div>
-          <p className="hero-footnote"><Check size={16} aria-hidden="true" /> Request a quote with no payment upfront</p>
         </div>
 
         <HeroVisual />
       </section>
 
       <section className="trust-strip" aria-label="What to expect from Volta Spark">
-        <div><ShieldCheck size={21} aria-hidden="true" /><span><strong>Trusted team</strong><small>Trained and background-checked</small></span></div>
-        <div><Leaf size={21} aria-hidden="true" /><span><strong>Thoughtful care</strong><small>Products chosen for each space</small></span></div>
-        <div><CalendarCheck2 size={21} aria-hidden="true" /><span><strong>Clear timing</strong><small>Your plan is agreed before we arrive</small></span></div>
+        <div><span className="trust-index">01</span><span><strong>Trusted team</strong><small>Trained and background-checked</small></span></div>
+        <div><span className="trust-index">02</span><span><strong>Thoughtful care</strong><small>Products chosen for each space</small></span></div>
+        <div><span className="trust-index">03</span><span><strong>Clear timing</strong><small>Your plan is agreed before we arrive</small></span></div>
       </section>
 
       <BrandMarquee />
 
       <section className="services-section" id="services" aria-labelledby="services-title">
         <div className="section-heading">
-          <h2 id="services-title">Choose the clean your space needs.</h2>
-          <p>From regular upkeep to a full reset, select a service to begin your request.</p>
+          <h2 id="services-title">Cleaning for the way you use your space.</h2>
+          <p>Choose the closest match. We will shape the final plan with you before the clean begins.</p>
         </div>
         <ServiceGrid />
       </section>
@@ -83,13 +79,13 @@ export default async function HomePage({
           <p>Complete the short form and review your prepared request in WhatsApp before sending.</p>
 
           <ol className="booking-steps" id="process">
-            <li><span>1</span><div><strong>Choose your service</strong><small>Select the closest match for your space.</small></div></li>
-            <li><span>2</span><div><strong>Add the essentials</strong><small>Your name, area, property and preferred date.</small></div></li>
-            <li><span>3</span><div><strong>Confirm on WhatsApp</strong><small>We agree availability and your quote directly.</small></div></li>
+            <li><span>01</span><div><strong>Choose your service</strong><small>Select the closest match for your space.</small></div></li>
+            <li><span>02</span><div><strong>Add the essentials</strong><small>Your name, area, property and preferred date.</small></div></li>
+            <li><span>03</span><div><strong>Confirm on WhatsApp</strong><small>We agree availability and your quote directly.</small></div></li>
           </ol>
 
           <div className="booking-contact">
-            <MessageCircle size={21} aria-hidden="true" />
+            <WhatsAppIcon width={20} height={20} aria-hidden="true" />
             <span><small>Prefer to chat now?</small><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">{DISPLAY_PHONE}</a></span>
           </div>
         </div>

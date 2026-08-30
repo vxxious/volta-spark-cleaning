@@ -25,7 +25,7 @@ test("server-renders the complete one-page Volta Spark journey", async () => {
   assert.match(html, /Volta Spark/);
   assert.match(html, /A cleaner space/);
   assert.match(html, /without the stress/);
-  assert.match(html, /Choose the clean your space needs/);
+  assert.match(html, /Cleaning for the way you use your space/);
   assert.match(html, /Careful work\. Clear communication/);
   assert.match(html, /Tell us what needs cleaning/);
   assert.match(html, /id="services"/);
@@ -56,7 +56,7 @@ test("legacy page URLs return visitors to the one-page journey", async () => {
 });
 
 test("ships product metadata, purposeful motion and no starter dependencies", async () => {
-  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, styles, packageJson] = await Promise.all([
+  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, whatsappIcon, styles, packageJson] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/booking-form.tsx", import.meta.url), "utf8"),
@@ -65,17 +65,22 @@ test("ships product metadata, purposeful motion and no starter dependencies", as
     readFile(new URL("../components/service-grid.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/hero-visual.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/brand-marquee.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/whatsapp-icon.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /Professional Cleaning in Lagos/);
   assert.match(layout, /\/og\.png/);
+  assert.match(layout, /@fontsource-variable\/archivo/);
   assert.match(layout, /SiteHeader/);
   assert.match(layout, /SiteFooter/);
   assert.match(layout, /Skip to main content/);
   assert.match(bookingForm, /wa\.me\/\$\{WHATSAPP_NUMBER\}/);
-  assert.match(siteData, /icon: RefreshCcw/);
+  assert.doesNotMatch(siteData, /icon:/);
+  assert.match(whatsappIcon, /viewBox="0 0 24 24"/);
+  assert.match(page, /WhatsAppIcon/);
+  assert.doesNotMatch(page, /MessageCircle|ShieldCheck|CalendarCheck2|\bLeaf\b/);
   assert.match(socialLinks, /Instagram/);
   assert.match(socialLinks, /TikTok/);
   assert.match(socialLinks, /Facebook/);
