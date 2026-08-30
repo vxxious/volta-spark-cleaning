@@ -82,7 +82,9 @@ test("ships product metadata, purposeful motion and no starter dependencies", as
   ]);
 
   assert.match(layout, /Professional Cleaning in Lagos/);
-  assert.match(layout, /\/og\.png/);
+  assert.match(layout, /\/og-image\.jpg/);
+  assert.match(layout, /\/favicon\.jpg/);
+  assert.doesNotMatch(layout, /\/og\.png|favicon\.svg/);
   assert.match(layout, /@fontsource-variable\/archivo/);
   assert.match(layout, /SiteHeader/);
   assert.match(layout, /SiteFooter/);
