@@ -101,8 +101,8 @@ test("publishes canonical, structured and crawl-discovery metadata", async () =>
   assert.match(sitemapText, /<loc>https:\/\/voltasparkcleaning\.vercel\.app\/booking<\/loc>/);
 });
 
-test("ships product metadata, purposeful motion and no starter dependencies", async () => {
-  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, whatsappIcon, styles, packageJson, viteConfig, llmsText, publicFiles] = await Promise.all([
+test("ships product metadata, resilient navigation, purposeful motion and no starter dependencies", async () => {
+  const [layout, page, bookingForm, siteData, socialLinks, serviceGrid, heroVisual, brandMarquee, whatsappIcon, siteHeader, siteFooter, breadcrumbs, notFound, styles, packageJson, viteConfig, llmsText, publicFiles] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/booking-form.tsx", import.meta.url), "utf8"),
@@ -112,6 +112,10 @@ test("ships product metadata, purposeful motion and no starter dependencies", as
     readFile(new URL("../components/hero-visual.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/brand-marquee.tsx", import.meta.url), "utf8"),
     readFile(new URL("../components/whatsapp-icon.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/site-header.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/site-footer.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/breadcrumbs.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/not-found.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
@@ -128,6 +132,8 @@ test("ships product metadata, purposeful motion and no starter dependencies", as
   assert.match(layout, /SiteFooter/);
   assert.match(layout, /Skip to main content/);
   assert.match(bookingForm, /wa\.me\/\$\{WHATSAPP_NUMBER\}/);
+  assert.match(bookingForm, /window\.location\.assign/);
+  assert.doesNotMatch([page, serviceGrid, siteHeader, siteFooter, breadcrumbs, notFound].join("\n"), /from "next\/link"/);
   assert.doesNotMatch(siteData, /icon:/);
   assert.match(whatsappIcon, /viewBox="0 0 24 24"/);
   assert.match(page, /WhatsAppIcon/);

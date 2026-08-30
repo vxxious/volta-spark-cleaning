@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Native anchors bypass unreliable Vinext client routing in production. */
+
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -17,8 +18,8 @@ export default function NotFound() {
             <h1 id="not-found-title">This page is not here.</h1>
             <p>The link may have changed. Return home or continue directly to the cleaning request page.</p>
             <div className="not-found-actions">
-              <Link className="primary-button" href="/">Return home</Link>
-              <Link className="text-link" href="/booking">Book a cleaning <ArrowRight size={18} aria-hidden="true" /></Link>
+              <a className="primary-button" href="/">Return home</a>
+              <a className="text-link" href="/booking">Book a cleaning <ArrowRight size={18} aria-hidden="true" /></a>
             </div>
           </div>
         </div>

@@ -31,11 +31,7 @@ export function BookingForm({ initialService }: { initialService?: string }) {
       notes ? `Extra details: ${notes}` : "",
     ].filter(Boolean).join("\n");
 
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+    window.location.assign(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
   }
 
   return (

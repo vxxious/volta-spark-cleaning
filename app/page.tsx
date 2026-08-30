@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BrandMarquee } from "../components/brand-marquee";
 import { HeroVisual } from "../components/hero-visual";
@@ -75,7 +74,7 @@ export default function HomePage() {
             <p className="hero-copy">Professional cleaning for homes, offices and short lets across Lagos.</p>
             <div>
               <div className="hero-actions">
-                <Link className="primary-button" href="/booking">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></Link>
+                <a className="primary-button" href="/booking">Book a cleaning <ArrowRight size={19} aria-hidden="true" /></a>
                 <a className="text-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
                   <WhatsAppIcon width={18} height={18} aria-hidden="true" /> Chat on WhatsApp
                 </a>

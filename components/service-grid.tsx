@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useEffect, useRef } from "react";
 import { services } from "../lib/site-data";
@@ -36,7 +35,7 @@ export function ServiceGrid({ limit }: { limit?: number }) {
       {visibleServices.map((service, index) => {
         return (
           <li key={service.name}>
-            <Link
+            <a
               href={`/booking?service=${encodeURIComponent(service.name)}`}
               className="service-card"
               style={{ "--entry-delay": `${Math.min(index * 60, 300)}ms` } as CSSProperties}
@@ -47,7 +46,7 @@ export function ServiceGrid({ limit }: { limit?: number }) {
                 <span>{service.description}</span>
               </span>
               <span className="service-link">Choose <ArrowRight size={17} aria-hidden="true" /></span>
-            </Link>
+            </a>
           </li>
         );
       })}

@@ -1,4 +1,5 @@
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages -- Native anchors bypass unreliable Vinext client routing in production. */
+
 import { DISPLAY_PHONE, WHATSAPP_NUMBER } from "../lib/site-data";
 import { Brand } from "./brand";
 import { SocialLinks } from "./social-links";
@@ -14,9 +15,9 @@ export function SiteFooter() {
         </div>
         <div className="footer-column">
           <strong>Explore</strong>
-          <Link href="/#services">Services</Link>
-          <Link href="/#about">Why Volta Spark</Link>
-          <Link href="/booking">Book a clean</Link>
+          <a href="/#services">Services</a>
+          <a href="/#about">Why Volta Spark</a>
+          <a href="/booking">Book a clean</a>
         </div>
         <div className="footer-column">
           <strong>Contact</strong>
